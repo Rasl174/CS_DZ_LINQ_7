@@ -16,12 +16,13 @@ namespace CS_DZ_LINQ_7
             List<Soldier> soldiers2 = new List<Soldier> { new Soldier("Игнатьев", "Роман"), new Soldier("Мытых", "Артем"), 
                 new Soldier("Калашников", "Калаш"), new Soldier("Летчиков", "Валентин")};
 
-            var filteredSoldiers1 = soldiers1.Where(soldier => soldier.LastName.StartsWith("Б"));
-            var newSoldiers2 = filteredSoldiers1.Union(soldiers2);
+            var filteredSoldiers = soldiers1.Where(soldier => soldier.LastName.StartsWith("Б"));
+            soldiers2 = filteredSoldiers.Union(soldiers2).ToList();
+            soldiers1 = soldiers1.Except(filteredSoldiers).ToList();
 
             Console.WriteLine("Новый список отряда 2: ");
 
-            foreach (var soldier in newSoldiers2)
+            foreach (var soldier in soldiers2)
             {
                 Console.WriteLine(soldier.LastName + " " + soldier.Name);
             }
